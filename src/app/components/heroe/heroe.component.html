@@ -1,0 +1,26 @@
+<div *ngIf="!heroe;else heroeDetail" class="alert alert-warning" role="alert">
+	No se encontró el heroe indicado.
+</div>
+<ng-template #heroeDetail>
+	<h1 class="animated fadeIn">{{ heroe.nombre | uppercase }} <small>({{ heroe.aparicion | date:'y' }})</small></h1>
+	<hr>
+	<div class="row aminated fadeIn fast">
+		<div class="col-md-4">
+			<img [src]="heroe.img" class="img-fluid" [alt]="heroe.nombre">
+			<br><br>
+			<a [routerLink]="['/heroes']" class="btn btn-outline-danger btn-block">Regresar</a>
+		</div>
+	
+		<div class="col-md-8">
+			<h3>{{ heroe.nombre }}</h3>
+			<hr>
+			<p>{{ heroe.bio }}</p>
+			<div *ngIf="heroe.casa=='DC';else casaMarvel">
+				<img src="{{ 'assets/img/dc.png' }}" width="100px" alt="DC">
+			</div>
+			<ng-template>
+				<img src="{{ 'assets/img/Marvel.png' }}" width="100px" alt="Marvel" #casaMarvel>
+			</ng-template>
+		</div>
+	</div>
+</ng-template>
